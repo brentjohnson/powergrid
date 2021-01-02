@@ -1,24 +1,35 @@
 import React from 'react';
-import Status from './Status.js'
-import TurnOrder from './TurnOrder.js'
-import CityTracker from './CityTracker.js'
+
 import Auction from './Auction.js'
+import CityTracker from './CityTracker.js'
+import CreateJoin from './CreateJoin.js'
 import Map from './Map.js'
 import Market from './Market.js'
 import Player from './Player.js'
+import Status from './Status.js'
+import TurnOrder from './TurnOrder.js'
+
 import './App.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: [
-        { name: 'Alan' },
-        { name: 'Bobby' },
-        { name: 'Chris' },
-        { name: 'Dave' },
-      ]
+      gamecode: null,
+      players: []
     };
+  }
+
+  creategame(name) {
+    this.setState({ players: [{ name: name }] });
+    this.setState({ gamecode: 'asdf' });
+  }
+
+  joingame(gamecode, name) {
+    let playerlist = [...this.state.players];
+    playerlist.push({ name: name });
+    this.setState({ players: playerlist });
+    this.setState({ gamecode: gamecode });
   }
 
   render() {
@@ -31,12 +42,15 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Status></Status>
-        <TurnOrder></TurnOrder>
-        <CityTracker></CityTracker>
-        <Auction></Auction>
-        <Map></Map>
-        <Market></Market>
+        <Status />
+        <CreateJoin
+          onCreate={(x) => this.creategame(x)}
+          onJoin={(x, y) => this.joingame(x, y)} />
+        <TurnOrder />
+        <CityTracker />
+        <Auction />
+        <Map />
+        <Market />
         {players}
       </div>
     );
