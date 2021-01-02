@@ -9,7 +9,26 @@ import Player from './Player.js'
 import './App.css';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      players: [
+        { name: 'Alan' },
+        { name: 'Bobby' },
+        { name: 'Chris' },
+        { name: 'Dave' },
+      ]
+    };
+  }
+
   render() {
+
+    const players = this.state.players.map(player => {
+      return (
+        <Player name={player.name}></Player>
+      );
+    });
+
     return (
       <div className="App">
         <Status></Status>
@@ -18,10 +37,7 @@ class App extends React.Component {
         <Auction></Auction>
         <Map></Map>
         <Market></Market>
-        <Player></Player>
-        <Player></Player>
-        <Player></Player>
-        <Player></Player>
+        {players}
       </div>
     );
   }

@@ -4,7 +4,7 @@ class Player extends React.Component {
   render() {
     return (
       <div className="Player">
-        Player
+        Player: {this.props.name}
       </div>
     );
   }
