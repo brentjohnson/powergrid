@@ -1,25 +1,27 @@
 import React from 'react';
-import logo, { ReactComponent } from './logo.svg';
+import Status from './Status.js'
+import TurnOrder from './TurnOrder.js'
+import CityTracker from './CityTracker.js'
+import Auction from './Auction.js'
+import Map from './Map.js'
+import Market from './Market.js'
+import Player from './Player.js'
 import './App.css';
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Status></Status>
+        <TurnOrder></TurnOrder>
+        <CityTracker></CityTracker>
+        <Auction></Auction>
+        <Map></Map>
+        <Market></Market>
+        <Player></Player>
+        <Player></Player>
+        <Player></Player>
+        <Player></Player>
       </div>
     );
   }
