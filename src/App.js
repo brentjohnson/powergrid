@@ -16,13 +16,15 @@ class App extends React.Component {
     super(props);
     this.state = {
       gamecode: null,
-      players: []
+      players: [],
+      step: 0,  // Game step.  0 = Not started
     };
   }
 
   creategame(name) {
     this.setState({ players: [{ name: name }] });
     this.setState({ gamecode: 'asdf' });
+    this.setState({ step: 1 });
   }
 
   joingame(gamecode, name) {
@@ -30,6 +32,7 @@ class App extends React.Component {
     playerlist.push({ name: name });
     this.setState({ players: playerlist });
     this.setState({ gamecode: gamecode });
+    this.setState({ step: 1 });
   }
 
   render() {
@@ -40,20 +43,28 @@ class App extends React.Component {
       );
     });
 
-    return (
-      <div className="App">
-        <Status />
-        <CreateJoin
-          onCreate={(x) => this.creategame(x)}
-          onJoin={(x, y) => this.joingame(x, y)} />
-        <TurnOrder />
-        <CityTracker />
-        <Auction />
-        <Map />
-        <Market />
-        {players}
-      </div>
-    );
+    if (this.state.step === 0) {
+      return (
+        <div className="App">
+          <Status />
+          <CreateJoin
+            onCreate={(x) => this.creategame(x)}
+            onJoin={(x, y) => this.joingame(x, y)} />
+        </div>
+      );
+    } else {
+      return (
+        <div className="App">
+          <Status />
+          <TurnOrder />
+          <CityTracker />
+          <Auction />
+          <Map />
+          <Market />
+          {players}
+        </div>
+      );
+    }
   }
 }
 
